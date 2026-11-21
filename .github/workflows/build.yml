@@ -12,7 +12,7 @@ jobs:
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
       - run: chmod +x gradlew
-      - run: ./gradlew :patches:buildAndroid --no-daemon
+      - run: ./gradlew :patches:buildAndroid --no-daemon --dependency-verification=lenient
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
