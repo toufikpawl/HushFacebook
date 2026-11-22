@@ -155,7 +155,7 @@ final class CleanExitSpot {
             View exit = spot == null ? null : exitIn((ViewGroup) page);
             if (exit == null) continue;
             int[] center = centerIn(exit, page);
-            shifts.put(exit, new int[] {spot[0] - center[0], spot[1] - center[1]});
+            shifts.put(exit, new int[] {0, spot[1] - center[1]});
         }
         Iterator<Map.Entry<View, float[]>> each = moved.entrySet().iterator();
         while (each.hasNext()) {
