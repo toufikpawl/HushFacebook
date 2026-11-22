@@ -668,7 +668,7 @@ internal val POSITION_TYPES = listOf("STATIC", "RELATIVE", "ABSOLUTE")
 private const val ABSOLUTE = "ABSOLUTE"
 
 /** Two of the edges Litho's position helper sets, the names its edge enum keeps. */
-internal const val POSITION_END = "POSITION_END"
+internal const val POSITION_END = "POSITION_RIGHT"
 internal const val POSITION_BOTTOM = "POSITION_BOTTOM"
 
 /** How many dimensions Litho's margin and position helpers take after the style. */
