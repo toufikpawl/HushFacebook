@@ -192,6 +192,15 @@
     },
     {
       "paths": [
+        "patches/src/main/kotlin/app/morphe/util/PatchBodies.kt"
+      ],
+      "origin": "original",
+      "upstream": "https://github.com/SysAdminDoc/Hushfacebook",
+      "license": "GPL-3.0-only",
+      "changes": "Written for Hushfacebook for Morphe patcher 2.5.0: runs a patch body written against a bytecode or resource context inside patch()'s execute and finalize blocks, so the patches leave the deprecated bytecodePatch and resourcePatch builders with their bodies unchanged."
+    },
+    {
+      "paths": [
         "patches/src/main/kotlin/app/morphe/patches/facebook/feed/postprompts/PostXButton.kt"
       ],
       "origin": "original",
@@ -1022,6 +1031,15 @@
     },
     {
       "paths": [
+        "patches/src/main/kotlin/app/morphe/patches/facebook/feed/postprompts/ReactionsOnLikeButton.kt"
+      ],
+      "origin": "original",
+      "upstream": "https://github.com/SysAdminDoc/Hushfacebook",
+      "license": "GPL-3.0-only",
+      "changes": "Written for Hushfacebook for issue #541: a post's reaction faces drawn on its Like button. In Facebook 588 the compact Like button of the feed footer is built by two statics of LikeButtonFeedUFIFooterItemPlugin (a kept class name) that take a Context, the session, the plugin, the reaction and the button text, and return the button's look: a style, a text color, an icon and the text. The litho footer builds the same look itself, in the one other method that takes the reaction and calls the look's constructor. The patch adds a helper to the plugin that hands the extension each look's icon and the face it stands for, and calls it on every look those three build. The footer's renderer only puts the count into the look later, so a second helper runs first thing in the constructors of the button renderer that takes the finished look, and swaps an icon the extension knows for one holding its faces drawable when the text has a count. That renderer's one method that draws a drawable icon builds its image with a square size, so the patch gives a faces drawable a wider box there. The facepile drawable's own draw already asks the extension, and now hands it the drawable, so the faces it would draw at the end of the row move onto that row's Like button."
+    },
+    {
+      "paths": [
         "patches/src/main/kotlin/app/morphe/patches/facebook/ads/sponsoredreels/ReelItemStory.kt"
       ],
       "origin": "original",
@@ -1812,12 +1830,14 @@
       "paths": [
         "extensions/facebook/src/main/java/app/morphe/extension/facebook/comments/CommentSheetOptions.java",
         "patches/src/main/kotlin/app/morphe/patches/facebook/comments/options/CommentSheetOptionsPatch.kt",
-        "patches/src/main/kotlin/app/morphe/patches/facebook/comments/options/CommenterBadges.kt"
+        "patches/src/main/kotlin/app/morphe/patches/facebook/comments/options/CommenterBadges.kt",
+        "extensions/facebook/src/main/java/app/morphe/extension/facebook/comments/LiveCommentBar.java",
+        "patches/src/main/kotlin/app/morphe/patches/facebook/comments/options/LiveCommentBar.kt"
       ],
       "origin": "original",
       "upstream": "https://github.com/SysAdminDoc/Hushfacebook",
       "license": "GPL-3.0-only",
-      "changes": "Written for Hushfacebook from Facebook 577, 580 and 581: the comment box's attachment button socket is found by the name it gives itself, its name table by the GIF and sticker button plugins it names, and its per-button check, in another class, by the plugin numbers it shares with the table. The extension answers no for those two buttons while the switch is on. The reaction picker a long press on Like opens is found as the method that builds the kept RopeStyleUFIDockView and logs reactions_dock, and it returns early while Like only is on. The comment section is found by the name it gives itself, its reply flag through the expandReplySection update's arm of its state's update switch, and the extension's answer is written into that flag as the initial state finishes. The settings row opens Facebook's own fb://facebook_settings route. A commenter's badge (Top fan, Subscriber) is found through the two sockets that draw a commenter's name, by the names they give themselves and the badge plugins' kept class names, and its number is held first in each socket's check. No Facebook patch source in the ledger describes these."
+      "changes": "Written for Hushfacebook from Facebook 577, 580 and 581: the comment box's attachment button socket is found by the name it gives itself, its name table by the GIF and sticker button plugins it names, and its per-button check, in another class, by the plugin numbers it shares with the table. The extension answers no for those two buttons while the switch is on. The reaction picker a long press on Like opens is found as the method that builds the kept RopeStyleUFIDockView and logs reactions_dock, and it returns early while Like only is on. The comment section is found by the name it gives itself, its reply flag through the expandReplySection update's arm of its state's update switch, and the extension's answer is written into that flag as the initial state finishes. The settings row opens Facebook's own fb://facebook_settings route. A commenter's badge (Top fan, Subscriber) is found through the two sockets that draw a commenter's name, by the names they give themselves and the badge plugins' kept class names, and its number is held first in each socket's check. No Facebook patch source in the ledger describes these. In Facebook 588 a live video's player lays one bar of views under its live comments: the comment box, which tags itself LiveEventCommentComposer as it's built, and the row of reactions a tap sends to the stream. The bar is the one view whose (Context, AttributeSet, int) constructor casts a child to the comment box's class; every return of that constructor hands the bar to the extension, which holds it gone before each frame while its switch is on."
     },
     {
       "paths": [

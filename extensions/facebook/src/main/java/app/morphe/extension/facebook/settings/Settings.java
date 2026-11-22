@@ -1667,6 +1667,14 @@ public class Settings extends BaseSettings {
             new BooleanSetting("hushfacebook_hide_video_comment_composer", FALSE);
 
     /**
+     * The bar along the bottom of a live video, with its comment box and the row of reactions you
+     * tap to send, is held gone ({@link app.morphe.extension.facebook.comments.LiveCommentBar},
+     * #537). The live comments themselves stay. Off by default.
+     */
+    public static final BooleanSetting HIDE_LIVE_COMMENT_BAR =
+            new BooleanSetting("hushfacebook_hide_live_comment_bar", FALSE);
+
+    /**
      * Every comment starts with its reply thread open, as if View replies had been tapped
      * ({@link app.morphe.extension.facebook.comments.CommentSheetOptions}). Off by default. A
      * change shows on the next comments drawn.
@@ -2085,6 +2093,19 @@ public class Settings extends BaseSettings {
             new BooleanSetting("hushfacebook_feed_video_double_tap_skip", FALSE);
 
     /**
+     * A tap on a feed video brings up a play/pause button in its middle, as Facebook's reels viewer
+     * does, rather than opening it, and the video goes on playing. A tap on the video while the
+     * button shows opens it as before (#538). Taps are asked at each press. Starts off.
+     */
+    public static final BooleanSetting FEED_VIDEO_TAP_SHOWS_PAUSE =
+            new BooleanSetting("hushfacebook_feed_video_tap_shows_pause", FALSE) {
+                @Override
+                protected void onValueChanged() {
+                    FeedVideoControls.settingsChanged();
+                }
+            };
+
+    /**
      * A button on a feed video that shows its speed and steps it on a tap: 1x, 1.25x, 1.5x, 2x,
      * then 0.5x (#239). Needs Hold a reel for 2x in the build, whose patch reaches the player's
      * speed. Live videos don't get it. Starts off.
@@ -2271,6 +2292,15 @@ public class Settings extends BaseSettings {
      */
     public static final BooleanSetting KEEP_PLAYING_IN_BACKGROUND =
             new BooleanSetting("hushfacebook_keep_playing_in_background", FALSE);
+
+    /**
+     * With {@link #KEEP_PLAYING_IN_BACKGROUND} on, a reel playing in the background goes on to the
+     * reel the Reels viewer had ready after it instead of starting over (D#524,
+     * {@link app.morphe.extension.facebook.media.NextReel}). Starts off. Off or paused, the reel you
+     * left on plays over and over, as Facebook has it.
+     */
+    public static final BooleanSetting NEXT_REEL_IN_BACKGROUND =
+            new BooleanSetting("hushfacebook_next_reel_in_background", FALSE);
 
     /**
      * The picture-in-picture window gets a headphones button that closes the window and keeps the
@@ -3246,6 +3276,14 @@ public class Settings extends BaseSettings {
             new BooleanSetting("hushfacebook_hide_tab_bar_line", FALSE);
 
     /**
+     * A group's page, which Facebook opens on a screen of its own with no tab bar, gets a copy of the
+     * main screen's tab bar along its bottom (#503, {@link app.morphe.extension.facebook.navigation.GroupTabBar}).
+     * Off by default. Asked as each group's page comes to the front, so a change shows on the next one.
+     */
+    public static final BooleanSetting TAB_BAR_IN_GROUPS =
+            new BooleanSetting("hushfacebook_tab_bar_in_groups", FALSE);
+
+    /**
      * The top bar and the tab bar let the feed show through, with a blur of it behind them on
      * Android 12 and newer (#124, {@link app.morphe.extension.facebook.navigation.TranslucentBars}).
      * Asked as each frame of the main screen draws, so a change shows right away. A kept tab bar is
@@ -3502,6 +3540,15 @@ public class Settings extends BaseSettings {
      */
     public static final BooleanSetting HIDE_COMMENT_REACTIONS =
             new BooleanSetting("hushfacebook_hide_comment_reaction_preview", FALSE);
+
+    /**
+     * A post's stacked reaction faces leave the end of its button row and sit on its Like button,
+     * right before the count ({@link app.morphe.extension.facebook.feed.LikeButtonFaces}, #541). Off
+     * by default, and {@link #HIDE_POST_REACTIONS} overrules it. A change shows on the posts drawn
+     * after it.
+     */
+    public static final BooleanSetting REACTIONS_ON_LIKE_BUTTON =
+            new BooleanSetting("hushfacebook_reactions_on_like_button", FALSE);
 
     /**
      * The friend bubbles over a post's photo or video, each a friend's picture with the reaction they

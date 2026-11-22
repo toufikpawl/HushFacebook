@@ -74,7 +74,7 @@ public enum PatchFamily {
             Settings.HIDE_POST_PROMPTS, Settings.HIDE_POST_FOLLOW_LINK, Settings.HIDE_POST_SUBSCRIBE_LINK,
             Settings.HIDE_POST_JOIN_BUTTON, Settings.HIDE_POST_X,
             Settings.HIDE_POST_COUNTS, Settings.HIDE_POST_REACTIONS, Settings.HIDE_COMMENT_REACTIONS,
-            Settings.HIDE_REACTION_BUBBLES, Settings.HIDE_REACTOR_NAMES),
+            Settings.REACTIONS_ON_LIKE_BUTTON, Settings.HIDE_REACTION_BUBBLES, Settings.HIDE_REACTOR_NAMES),
     PROFILE_PICTURES(FamilyNames.PROFILE_PICTURES, "profilePictures", null,
             Settings.HIDE_FEED_PROFILE_PICTURES, Settings.HIDE_COMMENT_PROFILE_PICTURES),
     SEEN_POSTS(FamilyNames.SEEN_POSTS, "seenPosts", null,
@@ -201,7 +201,7 @@ public enum PatchFamily {
             Settings.LOAD_WHOLE_REPLY_THREADS, Settings.HIDE_REPLIES_BUTTON, Settings.HIDE_RELATED_GROUPS_UNDER_COMMENTS,
             Settings.HIDE_SHOP_LINK_COMMENTS, Settings.HIDE_COMMENTS_WITH_WORDS,
             Settings.HIDE_INCOMING_COMMENT_TYPING, Settings.HIDE_NEW_COMMENTS_PILL, Settings.SHOW_EVERY_COMMENT_REACTION,
-            Settings.HIDE_VIDEO_COMMENT_COMPOSER, Settings.TAP_ANYWHERE_ON_VIEW_MORE_REPLIES,
+            Settings.HIDE_VIDEO_COMMENT_COMPOSER, Settings.HIDE_LIVE_COMMENT_BAR, Settings.TAP_ANYWHERE_ON_VIEW_MORE_REPLIES,
             Settings.HIDE_POST_COMMENT_PREVIEWS, Settings.HIDE_COMMENT_DOWNVOTE_BUTTON,
             Settings.HIDE_COMMENT_LIKE_BUTTON, Settings.HIDE_COMMENT_REPLY_BUTTON, Settings.HIDE_COMMENTER_BADGES,
             Settings.HIDE_COMMENT_EMOJI_ROW, Settings.HIDE_COMMENT_BOX_LINE,
@@ -220,7 +220,8 @@ public enum PatchFamily {
             Settings.FEED_VIDEO_SEEK_BAR_LOWER, Settings.FEED_VIDEO_SEEK_BAR_EDGE, Settings.FEED_VIDEO_SEEK_BAR_TIMES,
             Settings.FEED_VIDEO_SEEK_BAR_LENGTH, Settings.FEED_VIDEO_SEEK_BAR_THIN, Settings.FEED_VIDEO_SEEK_BAR_FLAT_DRAG,
             Settings.FEED_VIDEO_FULL_PLAYER_BUTTON, Settings.FEED_VIDEO_FULL_PLAYER_CORNER,
-            Settings.FEED_VIDEO_SKIP_BUTTONS, Settings.FEED_VIDEO_DOUBLE_TAP_SKIP, Settings.FEED_VIDEO_SPEED_BUTTON,
+            Settings.FEED_VIDEO_SKIP_BUTTONS, Settings.FEED_VIDEO_DOUBLE_TAP_SKIP, Settings.FEED_VIDEO_TAP_SHOWS_PAUSE,
+            Settings.FEED_VIDEO_SPEED_BUTTON,
             Settings.CENTER_FULL_SCREEN_VIDEOS, Settings.STORY_SEEK_BAR, Settings.STORY_SEEK_BAR_FADE),
     RESUME_LONG_VIDEOS(FamilyNames.RESUME_LONG_VIDEOS, "resumeLongVideos", null,
             Settings.RESUME_LONG_VIDEOS, Settings.RECENTLY_WATCHED, Settings.RECENTLY_WATCHED_MENU_ROW,
@@ -232,7 +233,7 @@ public enum PatchFamily {
     PICTURE_IN_PICTURE(FamilyNames.PICTURE_IN_PICTURE, "pictureInPicture", null,
             Settings.PICTURE_IN_PICTURE, Settings.PICTURE_IN_PICTURE_FROM_MENU, Settings.PICTURE_IN_PICTURE_BUTTON),
     BACKGROUND_PLAY(FamilyNames.BACKGROUND_PLAY, "backgroundPlay", null,
-            Settings.KEEP_PLAYING_IN_BACKGROUND, Settings.BACKGROUND_PLAY_BUTTON),
+            Settings.KEEP_PLAYING_IN_BACKGROUND, Settings.NEXT_REEL_IN_BACKGROUND, Settings.BACKGROUND_PLAY_BUTTON),
     HDR_BRIGHTNESS(FamilyNames.HDR_BRIGHTNESS, "turnOffHdrBrightness", null,
             Settings.TURN_OFF_HDR_BRIGHTNESS, Settings.PREFER_SDR_RENDITIONS, Settings.DRAW_VIDEOS_WITH_THE_SCREEN),
     SKIP_SILENCE(FamilyNames.SKIP_SILENCE, "skipSilentParts", null,
@@ -303,7 +304,7 @@ public enum PatchFamily {
             Settings.KEEP_TOP_BAR,
             Settings.PHONE_LAYOUT_ON_BIG_SCREENS, Settings.TRANSLUCENT_BARS, Settings.ROUNDED_TAB_BAR, Settings.HIDE_STATUS_BAR,
             Settings.CENTER_FEED_ON_BIG_SCREENS, Settings.LIGHT_REELS_TAB_BARS, Settings.HIDE_REELS_TAB_BAR, Settings.HIDE_TAB_BAR_LINE,
-            Settings.HIDE_MESSENGER_BUTTON, Settings.HIDE_MESSENGER_COUNT, Settings.HIDE_FACEBOOK_LOGO,
+            Settings.TAB_BAR_IN_GROUPS, Settings.HIDE_MESSENGER_BUTTON, Settings.HIDE_MESSENGER_COUNT, Settings.HIDE_FACEBOOK_LOGO,
             Settings.HIDE_CREATE_BUTTON, Settings.HIDE_SEARCH_BUTTON, Settings.SEARCH_WITH_PICTURE),
     FORCE_DARK_MODE(FamilyNames.FORCE_DARK_MODE, "forceDarkMode", null,
             Settings.FORCE_DARK_MODE),
@@ -625,7 +626,7 @@ public enum PatchFamily {
         if (this == TAP_TO_PLAY) anyOn = Settings.TAP_TO_PLAY.savedValue() || Settings.INLINE_FEED_VIDEO_CONTROLS.savedValue()
                 || Settings.FEED_VIDEO_CAST_BUTTON.savedValue() || Settings.FEED_VIDEO_SEEK_BAR.savedValue()
                 || Settings.FEED_VIDEO_FULL_PLAYER_BUTTON.savedValue() || Settings.FEED_VIDEO_SKIP_BUTTONS.savedValue()
-                || Settings.FEED_VIDEO_DOUBLE_TAP_SKIP.savedValue()
+                || Settings.FEED_VIDEO_DOUBLE_TAP_SKIP.savedValue() || Settings.FEED_VIDEO_TAP_SHOWS_PAUSE.savedValue()
                 || Settings.FEED_VIDEO_SPEED_BUTTON.savedValue() || Settings.CENTER_FULL_SCREEN_VIDEOS.savedValue();
         // The time switch starts on, and does nothing without the bar kept; Tap the bar to seek works alone.
         if (this == PROGRESS_BAR) anyOn = Settings.KEEP_PROGRESS_BAR.savedValue() || Settings.TAP_TO_SEEK.savedValue();

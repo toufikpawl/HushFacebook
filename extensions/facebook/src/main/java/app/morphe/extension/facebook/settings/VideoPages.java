@@ -527,6 +527,12 @@ final class VideoPages {
                                 + "Keep tapping to go further. Live videos work too when they can be rewound. "
                                 + "One tap on a side still opens the video, a moment later than usual. "
                                 + "With Tap to play on, it needs Inline feed video controls on too.")));
+                // Asked at each press, so it applies to the next tap.
+                playback.addPreference(toggle(context, Settings.FEED_VIDEO_TAP_SHOWS_PAUSE,
+                        L10n.t("Tapping a feed video shows a pause button in its middle and the video keeps playing, "
+                                + "so a tap doesn't open it in Reels. Tap the button to pause or play. "
+                                + "Tap the video again while the button shows to open it. Ads keep their own controls. "
+                                + "With Tap to play on, it needs Inline feed video controls on too.")));
                 // Hold a reel for 2x's patch reaches the player's speed, which the button reads and sets.
                 if (build.contains(PatchFamily.REEL_HOLD)) {
                     playback.addPreference(toggle(context, Settings.FEED_VIDEO_SPEED_BUTTON,
@@ -667,8 +673,14 @@ final class VideoPages {
             if (build.contains(PatchFamily.BACKGROUND_PLAY)) {
                 // Asked on each stop of a Facebook screen, so a change counts from the next time you leave.
                 playback.addPreference(toggle(context, Settings.KEEP_PLAYING_IN_BACKGROUND,
-                        L10n.t("A video you started with a tap keeps its sound after you leave Facebook, and its "
-                                + "notification can pause it. Swiping the notification away or taking a call stops it.")));
+                        L10n.t("A video you started with a tap, or a reel you swiped to in Reels, keeps its sound "
+                                + "after you leave Facebook, and its notification can pause it. Swiping the "
+                                + "notification away or taking a call stops it.")));
+                // Asked as each background reel nears its end, so a change counts right away.
+                playback.addPreference(toggle(context, Settings.NEXT_REEL_IN_BACKGROUND,
+                        L10n.t("When a reel playing in the background ends, the next reel plays instead of the same one "
+                                + "again. It goes through the reels Reels had loaded when you left. Works with Keep "
+                                + "playing in the background on.")));
                 if (build.contains(PatchFamily.PICTURE_IN_PICTURE)) {
                     // Asked as each window's buttons are made, so a change shows from the next window.
                     playback.addPreference(toggle(context, Settings.BACKGROUND_PLAY_BUTTON,

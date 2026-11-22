@@ -312,6 +312,11 @@ final class FeedPages {
                         L10n.t("Hides the stacked reaction icons and the reactions count under posts. The space stays, "
                                 + "so a tap where they were still opens the list of reactions. To take the number off the Like "
                                 + "button too, turn on Hide counts on posts.")));
+                feed.addPreference(toggle(context, Settings.REACTIONS_ON_LIKE_BUTTON,
+                        L10n.t("Moves a post's reaction faces from the end of its button row onto the Like button, "
+                                + "right before the count. The Like button likes and reacts as before. A video showing "
+                                + "its views there gets one Like face, or your own reaction once you react. Hide the "
+                                + "reaction preview on posts overrules it. A change shows on the posts drawn after it.")));
                 feed.addPreference(toggle(context, Settings.HIDE_REACTION_BUBBLES,
                         L10n.t("Takes away the friend's picture with a reaction on it that Facebook puts on a photo or "
                                 + "video when a friend reacted. A change shows on the posts drawn after it.")));
@@ -376,16 +381,17 @@ final class FeedPages {
                 feed.addPreference(toggle(context, Settings.SHOW_FULL_POST_TEXT,
                         L10n.t("Posts in the feed show all of their text, so there's no See more to tap. Tap the text to fold "
                                 + "it back. Reel captions have their own switch under Reels and Watch.")));
-                // Read as each header's name is laid out (#533).
-                if (VideoPages.fullNamesInBuild()) {
-                    feed.addPreference(toggle(context, Settings.SHOW_FULL_NAMES,
-                            L10n.t("A long name at the top of a post wraps onto the next line instead of ending in \"...\". "
-                                    + "A name that fits still takes one line.")));
-                }
             }
             if (build.contains(PatchFamily.FOLD_LONG_TEXT)) {
-                // Read as each post's text is cut, so a change shows on the posts drawn after it.
+                // Read as each post's text is cut, so a change shows on the posts drawn after it. Right under
+                // Show full post text, which its summary says comes first (#497).
                 feed.addPreference(foldPostsRow(context));
+            }
+            // Read as each header's name is laid out (#533).
+            if (build.contains(PatchFamily.FULL_POST_TEXT) && VideoPages.fullNamesInBuild()) {
+                feed.addPreference(toggle(context, Settings.SHOW_FULL_NAMES,
+                        L10n.t("A long name at the top of a post wraps onto the next line instead of ending in \"...\". "
+                                + "A name that fits still takes one line.")));
             }
             if (build.contains(PatchFamily.TRANSLATE_POSTS)) {
                 feed.addPreference(toggle(context, Settings.TRANSLATE_POST_LINK,
@@ -1097,6 +1103,8 @@ final class FeedPages {
                     L10n.t("The Write a comment box under a post's comments goes away. You can still read every comment.")));
             comments.addPreference(toggle(context, Settings.HIDE_VIDEO_COMMENT_COMPOSER,
                     L10n.t("The Add a comment box under a full-screen video goes away. Comment boxes on posts stay.")));
+            comments.addPreference(toggle(context, Settings.HIDE_LIVE_COMMENT_BAR,
+                    L10n.t("The comment box and the row of reactions along the bottom of a live video go away, so a stray tap can't send one. The live comments stay.")));
             comments.addPreference(toggle(context, Settings.OPEN_REPLY_THREADS,
                     L10n.t("Comments show their replies right away, so there's no View replies to tap.")));
             comments.addPreference(toggle(context, Settings.LOAD_WHOLE_REPLY_THREADS,
