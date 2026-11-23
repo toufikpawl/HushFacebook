@@ -661,7 +661,7 @@ internal const val FLOAT_CLEAN_BUTTON = "$CLEAN_MODE->floatCleanButton()Z"
  * How far the Clean mode button sits above the overlay's bottom, in dp (#391): a finger's height,
  * which puts it where the reporter marked, clear of the seek bar's touch area.
  */
-internal const val CLEAN_BUTTON_LIFT_DP = 290.0
+internal const val CLEAN_BUTTON_LIFT_DP = 270.0
 
 /** Yoga's position types, the names its enum keeps. */
 internal val POSITION_TYPES = listOf("STATIC", "RELATIVE", "ABSOLUTE")
